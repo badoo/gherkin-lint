@@ -74,9 +74,7 @@ function testFeature(feature, configuration, mergedConfiguration) {
     }).groupBy(function(tagLocation) {
       return tagLocation.line;
     }).forEach(function(locationsPerLine) {
-      var firstLocation = locationsPerLine.sort(function(location) {
-        return -location.column;
-      })[0];
+      var firstLocation = _(locationsPerLine).minBy('column');
       test(firstLocation, type);
     });
   }
